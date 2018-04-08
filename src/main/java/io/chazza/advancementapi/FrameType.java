@@ -9,6 +9,7 @@ public enum FrameType {
     TASK("task"),
     GOAL("goal"),
     CHALLENGE("challenge");
+
     private String name;
 
     FrameType(String name) {
@@ -16,12 +17,15 @@ public enum FrameType {
     }
 
     public static FrameType getFromString(String frameType) {
-        if (frameType.equalsIgnoreCase("random")) return FrameType.RANDOM();
-        else try {
-            return FrameType.valueOf(frameType);
-        } catch (EnumConstantNotPresentException e) {
-            Bukkit.getLogger().info("[AdvancementAPI] Unknown FrameType given. Using default (TASK)");
-            return FrameType.TASK;
+        if (frameType.equalsIgnoreCase("random")) {
+            return FrameType.RANDOM();
+        } else {
+            try {
+                return FrameType.valueOf(frameType);
+            } catch (EnumConstantNotPresentException e) {
+                Bukkit.getLogger().info("[AdvancementAPI] Unknown FrameType given. Using default (TASK)");
+                return FrameType.TASK;
+            }
         }
     }
 
@@ -30,6 +34,7 @@ public enum FrameType {
         return frameTypes[(int) (Math.random() * (frameTypes.length - 1))];
     }
 
+    @Override
     public String toString() {
         return name;
     }

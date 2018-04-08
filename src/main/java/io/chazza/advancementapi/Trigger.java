@@ -1,10 +1,10 @@
 package io.chazza.advancementapi;
 
-import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+
+import com.google.gson.JsonObject;
 
 /**
  * Created by ysl3000
@@ -25,24 +25,19 @@ public class Trigger {
     }
 
     public JsonObject toJsonObject() {
-
         JsonObject triggerObj = new JsonObject();
 
         final JsonObject advConditions = new JsonObject();
         triggerObj.addProperty("trigger", "minecraft:" + this.type.toString().toLowerCase());
         this.conditions.forEach(conditionBuilder -> {
-
             Condition condition = conditionBuilder.build();
             advConditions.add(condition.name, condition.set);
         });
         if (!this.conditions.isEmpty())
             triggerObj.add("conditions", advConditions);
 
-
         return triggerObj;
-
     }
-
 
     public static enum TriggerType {
         ARBITRARY_PLAYER_TICK,
@@ -108,7 +103,6 @@ public class Trigger {
         public Trigger.TriggerBuilder clearConditions() {
             if (this.conditions != null)
                 this.conditions.clear();
-
             return this;
         }
 
@@ -126,10 +120,10 @@ public class Trigger {
                     conditions.addAll(this.conditions);
                     conditions = java.util.Collections.unmodifiableSet(conditions);
             }
-
             return new Trigger(type, name, conditions);
         }
 
+        @Override
         public String toString() {
             return "io.chazza.advancementapi.Trigger.TriggerBuilder(type=" + this.type + ", name=" + this.name + ", conditions=" + this.conditions + ")";
         }

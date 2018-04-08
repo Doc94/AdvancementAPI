@@ -1,11 +1,12 @@
 package io.chazza.advancementapi;
 
-import com.google.gson.JsonObject;
 import org.bukkit.inventory.ItemStack;
+
+import com.google.gson.JsonObject;
 
 /**
  * Created by ysl3000
- */ //BEGIN CLASSES
+ */
 public class Condition {
     protected String name;
     protected JsonObject set;
@@ -20,11 +21,10 @@ public class Condition {
     }
 
     public static ConditionBuilder builder(String name, ItemStack itemStack) {
-        return Condition.builder(name,convertItemToJSON(itemStack));
+        return Condition.builder(name, convertItemToJSON(itemStack));
     }
 
-
-    //BEGIN UTIL
+    @SuppressWarnings("deprecation")
     private static JsonObject convertItemToJSON(ItemStack item) {
         JsonObject itemJSON = new JsonObject();
         itemJSON.addProperty("item", "minecraft:" + item.getType().name().toLowerCase());
@@ -32,8 +32,6 @@ public class Condition {
         itemJSON.addProperty("data", item.getData().getData());
         return itemJSON;
     }
-
-
 
     public static class ConditionBuilder {
         private String name;
@@ -56,6 +54,7 @@ public class Condition {
             return new Condition(name, set);
         }
 
+        @Override
         public String toString() {
             return "io.chazza.advancementapi.Condition.ConditionBuilder(name=" + this.name + ", set=" + this.set + ")";
         }

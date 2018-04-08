@@ -1,11 +1,12 @@
 package io.chazza.advancementapi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.chat.ComponentSerializer;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
@@ -13,12 +14,13 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 
 /**
  * @author charliej - the very API
@@ -29,9 +31,7 @@ import java.util.Set;
  * @author PROgrammer_JARvis - rework and combining
  * @author ysl3000 - useful advice and bug-tracking at PullRequests/ JUnit-Tests, full Builder-Pattern support, Lombok
  */
-
 public class AdvancementAPI {
-
     private static final Gson gson = new Gson();
 
     private NamespacedKey id;
@@ -40,7 +40,6 @@ public class AdvancementAPI {
     private FrameType frame;
     private boolean announce = true, toast = true, hidden = true;
     private int counter = 1;
-
     private Set<Trigger.TriggerBuilder> triggers;
 
     private AdvancementAPI(NamespacedKey id, String parent, String icon, String background, TextComponent title, TextComponent description, FrameType frame, boolean announce, boolean toast, boolean hidden, int counter, Set<Trigger.TriggerBuilder> triggers) {
@@ -58,11 +57,9 @@ public class AdvancementAPI {
         this.triggers = triggers;
     }
 
-
     public static AdvancementAPIBuilder builder(NamespacedKey id) {
         return new AdvancementAPIBuilder().id(id);
     }
-
 
     @Deprecated
     public void save(String world) {
@@ -71,15 +68,10 @@ public class AdvancementAPI {
 
     @Deprecated
     public void save(World world) {
-
-
-        File file = new File(world.getWorldFolder(), "data" + File.separator + "advancements"
-                + File.separator + id.getNamespace() + File.separator + id.getKey() + ".json");
-
+        File file = new File(world.getWorldFolder(), "data" + File.separator + "advancements" + File.separator
+                + id.getNamespace() + File.separator + id.getKey() + ".json");
         File dir = file.getParentFile();
-
         if (dir.mkdirs() || dir.exists()) {
-
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write(getJSON());
                 Bukkit.getLogger().info("[AdvancementAPI] Created " + id.toString());
@@ -109,13 +101,11 @@ public class AdvancementAPI {
 
         JsonObject criteria = new JsonObject();
 
-
-        //Changed to normal comment as JavaDocs are not displayed here @PROgrm_JARvis
+        // Changed to normal comment as JavaDocs are not displayed here @PROgrm_JARvis
         /*
-         * Define each criteria, for each criteria in list,
-         * add items, trigger and conditions
+         * Define each criteria, for each criteria in list, add items, trigger
+         * and conditions
          */
-
         for (Trigger.TriggerBuilder triggerBuilder : getTriggers()) {
             Trigger trigger = triggerBuilder.build();
             criteria.add(trigger.name, trigger.toJsonObject());
@@ -125,7 +115,6 @@ public class AdvancementAPI {
         json.add("display", display);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
         return gson.toJson(json);
     }
 
@@ -135,7 +124,6 @@ public class AdvancementAPI {
 
     public static JsonElement getJsonFromComponent(TextComponent textComponent) {
         return gson.fromJson(ComponentSerializer.toString(textComponent), JsonElement.class);
-
     }
 
     public TextComponent getTitle() {
@@ -187,11 +175,11 @@ public class AdvancementAPI {
         Advancement advancement = getAdvancement();
         for (Player player : players) {
             if (!player.getAdvancementProgress(advancement).isDone()) {
-                Collection<String> remainingCriteria = player.getAdvancementProgress(advancement).getRemainingCriteria();
+                Collection<String> remainingCriteria = player.getAdvancementProgress(advancement)
+                        .getRemainingCriteria();
                 Bukkit.getLogger().info(remainingCriteria.toString());
                 for (String remainingCriterion : remainingCriteria)
-                    player.getAdvancementProgress(getAdvancement())
-                            .awardCriteria(remainingCriterion);
+                    player.getAdvancementProgress(getAdvancement()).awardCriteria(remainingCriterion);
             }
         }
         return this;
@@ -204,8 +192,7 @@ public class AdvancementAPI {
                 Collection<String> awardedCriteria = player.getAdvancementProgress(advancement).getAwardedCriteria();
                 Bukkit.getLogger().info(awardedCriteria.toString());
                 for (String awardedCriterion : awardedCriteria)
-                    player.getAdvancementProgress(getAdvancement())
-                            .revokeCriteria(awardedCriterion);
+                    player.getAdvancementProgress(getAdvancement()).revokeCriteria(awardedCriterion);
             }
         }
         return this;
@@ -230,7 +217,8 @@ public class AdvancementAPI {
                 break;
             }
         }
-        if (criteriaString == null) return false;
+        if (criteriaString == null)
+            return false;
         player.getAdvancementProgress(getAdvancement()).awardCriteria(criteriaString);
         return true;
     }
@@ -244,7 +232,8 @@ public class AdvancementAPI {
                 break;
             }
         }
-        if (criteriaString == null) return false;
+        if (criteriaString == null)
+            return false;
         player.getAdvancementProgress(getAdvancement()).revokeCriteria(criteriaString);
         return true;
     }
@@ -295,15 +284,12 @@ public class AdvancementAPI {
         }
 
         public AdvancementAPIBuilder title(String title) {
-
             this.title = new TextComponent(title);
-
             return this;
         }
 
         public AdvancementAPIBuilder title(TextComponent title) {
             this.title = title;
-
             return this;
         }
 
@@ -316,7 +302,6 @@ public class AdvancementAPI {
             this.description = description;
             return this;
         }
-
 
         public AdvancementAPIBuilder id(NamespacedKey id) {
             this.id = id;
@@ -380,7 +365,6 @@ public class AdvancementAPI {
         public AdvancementAPIBuilder clearTriggers() {
             if (this.triggers != null)
                 this.triggers.clear();
-
             return this;
         }
 
@@ -398,13 +382,12 @@ public class AdvancementAPI {
                     triggers.addAll(this.triggers);
                     triggers = java.util.Collections.unmodifiableSet(triggers);
             }
-
             return new AdvancementAPI(id, parent, icon, background, title, description, frame, announce, toast, hidden, counter, triggers);
         }
 
+        @Override
         public String toString() {
             return "io.chazza.advancementapi.AdvancementAPI.AdvancementAPIBuilder(id=" + this.id + ", parent=" + this.parent + ", icon=" + this.icon + ", background=" + this.background + ", title=" + this.title + ", description=" + this.description + ", frame=" + this.frame + ", announce=" + this.announce + ", toast=" + this.toast + ", hidden=" + this.hidden + ", counter=" + this.counter + ", triggers=" + this.triggers + ")";
         }
     }
-
 }
