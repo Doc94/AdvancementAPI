@@ -106,6 +106,12 @@ public class Distance implements Jsonable {
         return distanceObj;
     }
 
+    /**
+     * Builder for {@link Distance}s. See {@link Distance} for more information
+     * on distances in Minecraft.
+     * 
+     * @author Kaonashi97
+     */
     public static class DistanceBuilder implements Builder<Distance> {
         private RangeBuilder x;
         private RangeBuilder y;

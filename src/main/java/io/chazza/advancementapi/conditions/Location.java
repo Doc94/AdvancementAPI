@@ -129,6 +129,12 @@ public class Location implements Jsonable {
         return locationObj;
     }
 
+    /**
+     * Builder for {@link Location}s. See {@link Location} for more information
+     * on ranges in Minecraft.
+     * 
+     * @author Kaonashi97
+     */
     public static class LocationBuilder implements Builder<Location> {
         private RangeBuilder x;
         private RangeBuilder y;
