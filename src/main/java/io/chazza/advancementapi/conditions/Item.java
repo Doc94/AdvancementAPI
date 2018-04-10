@@ -220,6 +220,7 @@ public class Item implements Jsonable {
         private String nbt;
 
         private ItemBuilder() {
+            // builder pattern
         }
 
         private ItemBuilder(String item) {
