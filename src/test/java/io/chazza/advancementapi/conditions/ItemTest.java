@@ -1,7 +1,7 @@
 package io.chazza.advancementapi.conditions;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import org.bukkit.Material;
 import org.junit.Test;
@@ -23,17 +23,25 @@ public class ItemTest {
     }
 
     @Test
+    public void testItem_GIVEN_ItemWithTag_THEN_ExpectJsonToBeWithTag() throws Exception {
+        underTest = Item.builder("#minecraft:wool").build();
+
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{\"tag\":\"minecraft:wool\"}"));
+    }
+
+    @Test
     public void testItem_GIVEN_WithData_THEN_ExpectJsonToBeWithData() {
         underTest = Item.builder("minecraft:stone").data(1).build();
 
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"item\":\"minecraft:stone\",\"data\":1}"));
     }
-    
+
     @Test
     public void testItem_GIVEN_LargeData_THEN_ExpectJsonToBeZero() throws Exception {
         underTest = Item.builder("minecraft:stone").data(400_000).build();
-        
+
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"item\":\"minecraft:stone\",\"data\":0}"));
     }

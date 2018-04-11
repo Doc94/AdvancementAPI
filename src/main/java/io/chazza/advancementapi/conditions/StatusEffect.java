@@ -51,7 +51,7 @@ import io.chazza.advancementapi.conditions.enums.Effect;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://www.minecraftforum.net/forums/minecraft-java-edition/redstone-discussion-and/commands-command-blocks-and/2809368#GenericEffects
+ * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-status-effects-object
  */
 public class StatusEffect implements Jsonable {
     private Effect effectType;

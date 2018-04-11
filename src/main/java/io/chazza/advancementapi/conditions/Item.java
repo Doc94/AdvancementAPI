@@ -23,11 +23,26 @@ import io.chazza.advancementapi.conditions.enums.Potion;
  * <p>
  * <b>1. "item"</b>
  * <p>
- * The "item" string specifies a base item ID to compare the item to. The
+ * The item string specifies a base item ID to compare the item to. The
  * following checks if the item is redstone.
  * 
  * <pre>
  * Item.builder("minecraft:redstone").build();
+ * </pre>
+ * 
+ * The tag string instead specifies the resource location to an ID group, minus
+ * the designating # character. These groups are a list of item IDs that the
+ * incoming item can match any one of. Default groups for items include:
+ * "#minecraft:wool", "#minecraft:planks", "#minecraft:stone_bricks",
+ * "#minecraft:wooden_buttons", "#minecraft:buttons", "#minecraft:carpets",
+ * "#minecraft:wooden_doors", "#minecraft:doors", "#minecraft:saplings", and
+ * "#minecraft:logs". Adding custom groups requires the use of data packs. The
+ * following checks if the item matches any of the IDs in the "minecraft:doors"
+ * group (which checks both the "#minecraft:wooden_doors" group as well as the
+ * "minecraft:iron_door" item ID).
+ * 
+ * <pre>
+ * Item.builder("#minecraft:wool").build();
  * </pre>
  * 
  * <b>2. "data"</b>
@@ -122,7 +137,7 @@ import io.chazza.advancementapi.conditions.enums.Potion;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://www.minecraftforum.net/forums/minecraft-java-edition/redstone-discussion-and/commands-command-blocks-and/2809368#GenericItem
+ * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-item-object
  */
 public class Item implements Jsonable {
     private String item;
@@ -180,7 +195,13 @@ public class Item implements Jsonable {
         JsonObject itemObj = new JsonObject();
 
         //@formatter:off
-        if (item != null) itemObj.addProperty("item", item);
+        if(item != null) {
+            if (item.trim().startsWith("#")) {
+                itemObj.addProperty("tag", item.trim().substring(1));
+            } else {
+                itemObj.addProperty("item", item);
+            }
+        }
         if (potion != null) itemObj.addProperty("potion", potion.toString());
         if (data != null && item != null) itemObj.addProperty("data", data);
         if (durability != null) itemObj.add("durability", durability.build().toJson());
@@ -209,6 +230,12 @@ public class Item implements Jsonable {
         return itemObj;
     }
 
+    /**
+     * Builder for {@link Item}s. See {@link Item} for more information on items
+     * in Minecraft.
+     * 
+     * @author Kaonashi97
+     */
     public static class ItemBuilder implements Builder<Item> {
         private String item;
         private Byte data;
@@ -344,7 +371,7 @@ public class Item implements Jsonable {
          * @return thsi builder
          */
         public ItemBuilder nbt(String nbt) {
-            this.nbt = nbt;// nbt.replace("\"", "\\\"");
+            this.nbt = nbt;
             return this;
         }
 

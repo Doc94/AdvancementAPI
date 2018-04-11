@@ -57,7 +57,7 @@ import io.chazza.advancementapi.conditions.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://www.minecraftforum.net/forums/minecraft-java-edition/redstone-discussion-and/commands-command-blocks-and/2809368#GenericDistance
+ * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-distance-object
  */
 public class Distance implements Jsonable {
     private RangeBuilder x;

@@ -67,7 +67,7 @@ import io.chazza.advancementapi.conditions.enums.Feature;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://www.minecraftforum.net/forums/minecraft-java-edition/redstone-discussion-and/commands-command-blocks-and/2809368#GenericLocation
+ * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-location-object
  */
 public class Location implements Jsonable {
     private RangeBuilder x;
@@ -131,7 +131,7 @@ public class Location implements Jsonable {
 
     /**
      * Builder for {@link Location}s. See {@link Location} for more information
-     * on ranges in Minecraft.
+     * on locations in Minecraft.
      * 
      * @author Kaonashi97
      */
