@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import io.chazza.advancementapi.common.Builder;
-import io.chazza.advancementapi.common.Jsonable;
+import io.chazza.advancementapi.common.KeyedJsonable;
 import io.chazza.advancementapi.conditions.enums.Effect;
 import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
@@ -53,7 +53,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * @author Kaonashi97
  * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-status-effects-object
  */
-public class StatusEffect implements Jsonable {
+public class StatusEffect implements KeyedJsonable {
     private Effect effectType;
     private RangeBuilder amplifier;
     private RangeBuilder duration;
@@ -91,6 +91,7 @@ public class StatusEffect implements Jsonable {
         return statusEffectObj;
     }
 
+    @Override
     public String getJsonKey() {
         return effectType.toString().toLowerCase();
     }

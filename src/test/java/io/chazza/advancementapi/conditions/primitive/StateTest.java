@@ -1,7 +1,7 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -17,5 +17,13 @@ public class StateTest {
 
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"type\":\"fern\",\"level\":\"14\"}"));
+    }
+    
+    @Test
+    public void testState_GIVEN_ClearState_THEN_ExpectJsonToWithoutState() throws Exception {
+        underTest = State.builder().add("type", "fern").clearStates().build();
+        
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{}"));
     }
 }

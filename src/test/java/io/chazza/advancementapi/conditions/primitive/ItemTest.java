@@ -3,12 +3,16 @@ package io.chazza.advancementapi.conditions.primitive;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.bukkit.Material;
 import org.junit.Test;
 
 import com.google.gson.Gson;
 
 import io.chazza.advancementapi.conditions.enums.Potion;
+import io.chazza.advancementapi.conditions.primitive.Enchantment.EnchantmentBuilder;
 
 public class ItemTest {
     private static final Gson gson = new Gson();
@@ -44,6 +48,14 @@ public class ItemTest {
 
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"item\":\"minecraft:stone\",\"data\":0}"));
+    }
+
+    @Test
+    public void testItem_GIVEN_NoItemWithData_THEN_ExpectJsonWithoutData() throws Exception {
+        underTest = Item.builder().data(1).build();
+
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{}"));
     }
 
     @Test
@@ -96,11 +108,30 @@ public class ItemTest {
     }
 
     @Test
+    public void testItem_GIVEN_Enchantments_THEN_ExpectJsonToBeWithEnchantments() throws Exception {
+        Collection<? extends EnchantmentBuilder> enchantments = Arrays.asList(Enchantment.builder(Range.builder()),
+                Enchantment.builder("minecraft:looting"));
+        underTest = Item.builder().enchantments(enchantments).build();
+
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{\"enchantments\":[{\"levels\":1},{\"enchantment\":\"minecraft:looting\"}]}"));
+    }
+
+    @Test
     public void testItem_GIVEN_EnchantmentLevel_THEN_ExpectJsonToBeWithEnchantmentLevel() {
         underTest = Item.builder("minecraft:stone").enchantment(Enchantment.builder(Range.builder())).build();
 
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"item\":\"minecraft:stone\",\"enchantments\":[{\"levels\":1}]}"));
+    }
+
+    @Test
+    public void testItem_GIVEN_EnchantmentClear_THEN_ExpectJsonToBeWithoutEnchantments() {
+        underTest = Item.builder("minecraft:stone").enchantment(Enchantment.builder(Range.builder()))
+                .clearEnchantments().build();
+
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{\"item\":\"minecraft:stone\"}"));
     }
 
     @Test

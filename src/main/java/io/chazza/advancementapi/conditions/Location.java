@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import io.chazza.advancementapi.common.Builder;
-import io.chazza.advancementapi.common.Jsonable;
+import io.chazza.advancementapi.common.KeyedJsonable;
 import io.chazza.advancementapi.conditions.enums.Dimension;
 import io.chazza.advancementapi.conditions.enums.Feature;
 import io.chazza.advancementapi.conditions.primitive.Range;
@@ -70,7 +70,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * @author Kaonashi97
  * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-location-object
  */
-public class Location implements Jsonable {
+public class Location implements KeyedJsonable {
     private RangeBuilder x;
     private RangeBuilder y;
     private RangeBuilder z;
@@ -126,6 +126,7 @@ public class Location implements Jsonable {
         return locationObj;
     }
 
+    @Override
     public String getJsonKey() {
         if (biome != null) {
             return "biome";

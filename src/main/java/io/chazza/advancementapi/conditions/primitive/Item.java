@@ -213,8 +213,7 @@ public class Item implements Jsonable {
             enchArray.add(new JsonObject());
             itemObj.add("enchantments", enchArray);
         } else {
-            enchantments.stream().filter(e -> e != null)
-                    .forEach(enchBuilder -> enchArray.add(enchBuilder.build().toJson()));
+            enchantments.stream().forEach(enchBuilder -> enchArray.add(enchBuilder.build().toJson()));
             /*
              * Do not set an empty enchantments list if possible enchantments
              * were set! An empty list will accept any enchantment as stated in
@@ -225,7 +224,9 @@ public class Item implements Jsonable {
             }
         }
 
-        itemObj.addProperty("nbt", nbt);
+        if (nbt != null) {
+            itemObj.addProperty("nbt", nbt);
+        }
 
         return itemObj;
     }

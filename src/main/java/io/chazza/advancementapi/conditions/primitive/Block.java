@@ -1,9 +1,8 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 
-import io.chazza.advancementapi.Condition;
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
 
@@ -19,21 +18,6 @@ import io.chazza.advancementapi.common.Jsonable;
  * 
  * <pre>
  * Block.builder("minecraft:tallgrass").build();
- * </pre>
- * 
- * <b>2. state</b>
- * <p>
- * The state object contains a list of custom keys, much like criteria does. The
- * names for these keys will correspond to the blockstate name you want to
- * detect, and the value corresponds to possible values for that blockstate. For
- * "minecraft:tallgrass", the type blockstate specifies which of the tallgrass
- * blocks it is. The block string must be specified to use this condition. The
- * following checks if the tallgrass is a fern.
- * <p>
- * Use the {@link State} object for adding states to your {@link Condition}.
- * 
- * <pre>
- * Condition.add(Block.builder("minecraft:tallgrass")).add(State.builder().add("type", "fern")).build();
  * </pre>
  * 
  * @author Kaonashi97
@@ -59,10 +43,6 @@ public class Block implements Jsonable {
     @Override
     public JsonElement toJson() {
         return new JsonPrimitive(block);
-    }
-
-    public String getJsonKey() {
-        return "block";
     }
 
     /**

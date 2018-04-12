@@ -15,7 +15,7 @@ public class EnchantmentTest {
     private Enchantment underTest;
 
     @Test
-    public void testEnchantment_GIVEN_Enchantment_THEN_ExpectJsonToBeObjWithEnchantment() throws Exception {
+    public void testEnchantment_GIVEN_Enchantment_THEN_ExpectJsonToBeWithEnchantment() throws Exception {
         underTest = Enchantment.builder("minecraft:looting").build();
 
         String json = gson.toJson(underTest.toJson());
@@ -23,10 +23,26 @@ public class EnchantmentTest {
     }
 
     @Test
-    public void testEnchantment_GIVEN_Levels_THEN_ExpectJsonToBeObjWithLevels() throws Exception {
+    public void testEnchantment_GIVEN_Levels_THEN_ExpectJsonToBeWithLevels() throws Exception {
         underTest = Enchantment.builder(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
         assertThat(json, is("{\"levels\":1}"));
+    }
+    
+    @Test
+    public void testEnchantment_GIVEN_BasicAddEnchantment_THEN_ExpectJsonToBeWithEnchantment() throws Exception {
+        underTest = Enchantment.builder(Range.builder()).enchantment("minecraft:looting").build();
+        
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{\"enchantment\":\"minecraft:looting\",\"levels\":1}"));
+    }
+    
+    @Test
+    public void testEnchantment_GIVEN_BasicAddLevels_THEN_ExpectJsonToBeWithLevels() throws Exception {
+        underTest = Enchantment.builder("minecraft:looting").levels(Range.builder()).build();
+        
+        String json = gson.toJson(underTest.toJson());
+        assertThat(json, is("{\"enchantment\":\"minecraft:looting\",\"levels\":1}"));
     }
 }
