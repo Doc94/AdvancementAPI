@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

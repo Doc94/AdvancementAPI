@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import com.google.gson.Gson;
+
+import io.chazza.advancementapi.conditions.primitive.Enchantment;
+import io.chazza.advancementapi.conditions.primitive.Range;
 
 public class EnchantmentTest {
     private static final Gson gson = new Gson();

@@ -6,8 +6,8 @@ import com.google.gson.JsonPrimitive;
 
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
-import io.chazza.advancementapi.conditions.Range.RangeBuilder;
 import io.chazza.advancementapi.conditions.enums.Effect;
+import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
 /**
  * A status effect object contains nested objects, whose key names reflect
@@ -82,20 +82,17 @@ public class StatusEffect implements Jsonable {
     @Override
     public JsonElement toJson() {
         JsonObject statusEffectObj = new JsonObject();
-
-        JsonObject attributesObj = new JsonObject();
         //@formatter:off
-        if (amplifier != null) attributesObj.add("amplifier", amplifier.build().toJson());
-        if (duration != null) attributesObj.add("duration", duration.build().toJson());
-        if (ambient != null) attributesObj.add("ambient", new JsonPrimitive(ambient));
-        if (visible != null) attributesObj.add("visible", new JsonPrimitive(visible));
+        if (amplifier != null) statusEffectObj.add("amplifier", amplifier.build().toJson());
+        if (duration != null) statusEffectObj.add("duration", duration.build().toJson());
+        if (ambient != null) statusEffectObj.add("ambient", new JsonPrimitive(ambient));
+        if (visible != null) statusEffectObj.add("visible", new JsonPrimitive(visible));
         //@formatter:on
-        if (attributesObj.size() == 0) {
-            attributesObj.add("visible", new JsonPrimitive(true));
-        }
-        statusEffectObj.add(effectType.toString().toLowerCase(), attributesObj);
-
         return statusEffectObj;
+    }
+
+    public String getJsonKey() {
+        return effectType.toString().toLowerCase();
     }
 
     /**

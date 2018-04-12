@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -13,9 +13,9 @@ import com.google.gson.JsonObject;
 
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
-import io.chazza.advancementapi.conditions.Enchantment.EnchantmentBuilder;
-import io.chazza.advancementapi.conditions.Range.RangeBuilder;
 import io.chazza.advancementapi.conditions.enums.Potion;
+import io.chazza.advancementapi.conditions.primitive.Enchantment.EnchantmentBuilder;
+import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
 /**
  * An item object contains a handful of data to compare to an incoming item

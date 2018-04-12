@@ -1,11 +1,9 @@
 package io.chazza.advancementapi.conditions;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
+import io.chazza.advancementapi.Condition;
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
 
@@ -32,9 +30,10 @@ import io.chazza.advancementapi.common.Jsonable;
  * blocks it is. The block string must be specified to use this condition. The
  * following checks if the tallgrass is a fern.
  * <p>
+ * Use the {@link State} object for adding states to your {@link Condition}.
  * 
  * <pre>
- * Block.builder("minecraft:tallgrass").state("type", "fern").build();
+ * Condition.add(Block.builder("minecraft:tallgrass")).add(State.builder().add("type", "fern")).build();
  * </pre>
  * 
  * @author Kaonashi97
@@ -42,11 +41,9 @@ import io.chazza.advancementapi.common.Jsonable;
  */
 public class Block implements Jsonable {
     private String block;
-    private Map<String, String> states = new LinkedHashMap<>();
 
-    private Block(String block, Map<String, String> states) {
+    private Block(String block) {
         this.block = block;
-        this.states = states;
     }
 
     /**
@@ -61,14 +58,11 @@ public class Block implements Jsonable {
 
     @Override
     public JsonElement toJson() {
-        JsonObject blockObj = new JsonObject();
-        blockObj.addProperty("block", block);
-        if (states != null && !states.isEmpty()) {
-            JsonObject statesObj = new JsonObject();
-            states.forEach((k, v) -> statesObj.addProperty(k, v));
-            blockObj.add("state", statesObj);
-        }
-        return blockObj;
+        return new JsonPrimitive(block);
+    }
+
+    public String getJsonKey() {
+        return "block";
     }
 
     /**
@@ -79,40 +73,14 @@ public class Block implements Jsonable {
      */
     public static class BlockBuilder implements Builder<Block> {
         private String block;
-        private Map<String, String> states = new LinkedHashMap<>();
 
         private BlockBuilder(String block) {
             this.block = block;
         }
 
-        /**
-         * The state object contains a list of custom keys, much like criteria
-         * does. The names for these keys will correspond to the blockstate name
-         * you want to detect, and the value corresponds to possible values for
-         * that blockstate.
-         * 
-         * @param key the key
-         * @param value the value
-         * @return this builder
-         */
-        public BlockBuilder state(String key, String value) {
-            states.put(key, value);
-            return this;
-        }
-
-        /**
-         * Removes all saved states from this block.
-         * 
-         * @return this builder
-         */
-        public BlockBuilder clearStates() {
-            states.clear();
-            return this;
-        }
-
         @Override
         public Block build() {
-            return new Block(block, states);
+            return new Block(block);
         }
     }
 }

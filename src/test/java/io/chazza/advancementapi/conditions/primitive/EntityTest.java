@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import io.chazza.advancementapi.conditions.Location;
+import io.chazza.advancementapi.conditions.StatusEffect;
 import io.chazza.advancementapi.conditions.enums.Effect;
 
 public class EntityTest {
@@ -42,7 +44,7 @@ public class EntityTest {
         underTest = Entity.builder().effects(StatusEffect.builder(Effect.SPEED)).build();
 
         String json = gson.toJson(underTest.toJson());
-        assertThat(json, is("{\"effects\":{\"minecraft:speed\":{\"visible\":true}}}"));
+        assertThat(json, is("{\"effects\":{\"minecraft:speed\":{}}}"));
     }
 
     @Test

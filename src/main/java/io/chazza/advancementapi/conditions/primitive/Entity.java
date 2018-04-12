@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import org.bukkit.NamespacedKey;
 
@@ -8,8 +8,8 @@ import com.google.gson.JsonObject;
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
 import io.chazza.advancementapi.conditions.Location.LocationBuilder;
-import io.chazza.advancementapi.conditions.Range.RangeBuilder;
 import io.chazza.advancementapi.conditions.StatusEffect.StatusEffectBuilder;
+import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
 /**
  * An entity object contains a handful of data to compare to an incoming entity.
@@ -99,8 +99,16 @@ public class Entity implements Jsonable {
         //@formatter:off
         if (type != null) entityObj.addProperty("type", type);
         if (distance != null) entityObj.add("distance", distance.build().toJson());
-        if (location != null) entityObj.add("location", location.build().toJson());
-        if (effects != null) entityObj.add("effects", effects.build().toJson());
+        if (location != null) {
+            JsonObject locationObj = new JsonObject();
+            locationObj.add(location.build().getJsonKey(), location.build().toJson());
+            entityObj.add("location", locationObj);
+        }
+        if (effects != null) {
+            JsonObject effectsObj = new JsonObject();
+            effectsObj.add(effects.build().getJsonKey(), effects.build().toJson());
+            entityObj.add("effects", effectsObj);
+        }
         if (nbt != null) entityObj.addProperty("nbt", nbt);
         //@formatter:on
         return entityObj;

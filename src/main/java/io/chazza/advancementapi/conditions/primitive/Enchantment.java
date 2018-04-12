@@ -1,4 +1,4 @@
-package io.chazza.advancementapi.conditions;
+package io.chazza.advancementapi.conditions.primitive;
 
 import org.bukkit.NamespacedKey;
 
@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
-import io.chazza.advancementapi.conditions.Range.RangeBuilder;
+import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
 /**
  * The "enchantments" list checks the item's enchantments (whether in the ench

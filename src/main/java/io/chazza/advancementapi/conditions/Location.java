@@ -9,9 +9,10 @@ import com.google.gson.JsonPrimitive;
 
 import io.chazza.advancementapi.common.Builder;
 import io.chazza.advancementapi.common.Jsonable;
-import io.chazza.advancementapi.conditions.Range.RangeBuilder;
 import io.chazza.advancementapi.conditions.enums.Dimension;
 import io.chazza.advancementapi.conditions.enums.Feature;
+import io.chazza.advancementapi.conditions.primitive.Range;
+import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
 
 /**
  * A location object contains a small amount of data to specify an origin,
@@ -107,26 +108,35 @@ public class Location implements Jsonable {
 
     @Override
     public JsonElement toJson() {
-        JsonObject locationObj = new JsonObject();
         if (biome != null) {
-            locationObj.add("biome",
-                    new JsonPrimitive(NamespacedKey.minecraft(biome.toString().toLowerCase()).toString()));
-            return locationObj;
+            return new JsonPrimitive(NamespacedKey.minecraft(biome.toString().toLowerCase()).toString());
         }
         if (feature != null) {
-            locationObj.add("feature", new JsonPrimitive(feature.toString()));
-            return locationObj;
+            return new JsonPrimitive(feature.toString());
         }
         if (dimension != null) {
-            locationObj.add("dimension", new JsonPrimitive(dimension.toString().toLowerCase()));
-            return locationObj;
+            return new JsonPrimitive(dimension.toString().toLowerCase());
         }
+        JsonObject locationObj = new JsonObject();
         //@formatter:off
         if (x != null) locationObj.add("x", x.build().toJson());
         if (y != null) locationObj.add("y", y.build().toJson());
         if (z != null) locationObj.add("z", z.build().toJson());
         //@formatter:on
         return locationObj;
+    }
+
+    public String getJsonKey() {
+        if (biome != null) {
+            return "biome";
+        }
+        if (feature != null) {
+            return "feature";
+        }
+        if (dimension != null) {
+            return "dimension";
+        }
+        return "position";
     }
 
     /**
