@@ -44,7 +44,7 @@ public enum Potion {
     
     TURTLE_MASTER,
     LONG_TURTLE_MASTER,
-    STRONG_TURTLE_MASTER,
+    STRONG_TURTLE_MASTER
     ;
     //@formatter:on
 

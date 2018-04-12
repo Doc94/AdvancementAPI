@@ -28,9 +28,11 @@ public enum Effect {
     GLOWING,
     LEVITATION,
     LUCK,
-    UNLUCK;
-    //SLOW_FALLING;
+    UNLUCK,
+    SLOW_FALLING
+    ;
     //@formatter:on
+
     @Override
     public String toString() {
         return "minecraft:" + super.toString();
