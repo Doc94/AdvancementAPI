@@ -115,7 +115,7 @@ public class Location implements KeyedJsonable {
             return new JsonPrimitive(feature.toString());
         }
         if (dimension != null) {
-            return new JsonPrimitive(dimension.toString().toLowerCase());
+            return new JsonPrimitive(dimension.toString());
         }
         JsonObject locationObj = new JsonObject();
         //@formatter:off
