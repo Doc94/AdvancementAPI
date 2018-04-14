@@ -1,5 +1,6 @@
 package io.chazza.advancementapi.conditions.primitive;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -94,7 +95,7 @@ public class State implements Jsonable {
 
         @Override
         public State build() {
-            return new State(states);
+            return new State(Collections.unmodifiableMap(states));
         }
     }
 }

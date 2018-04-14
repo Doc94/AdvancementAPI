@@ -1,5 +1,6 @@
 package io.chazza.advancementapi.conditions.primitive;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class ItemList implements Jsonable {
 
         @Override
         public ItemList build() {
-            return new ItemList(items);
+            return new ItemList(Collections.unmodifiableList(items));
         }
     }
 }
