@@ -13,7 +13,7 @@ public class FrameTypeTest {
     }
 
     @Test
-    public void testFrameType_getFromString() throws Exception {
+    public void testFrameType_getFromString() {
         assertNotNull(FrameType.getFromString("RANDom"));
         assertThat(FrameType.getFromString("task"), is(FrameType.TASK));
         assertThat(FrameType.getFromString("ChallenGE"), is(FrameType.CHALLENGE));
