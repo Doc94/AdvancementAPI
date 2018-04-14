@@ -20,7 +20,7 @@ public class SlotTest {
     }
 
     @Test
-    public void testSlot_GIVEN_Full_THEN_ExpectJsonToBeWithFull() throws Exception {
+    public void testSlot_GIVEN_Full_THEN_ExpectJsonToBeWithFull() {
         underTest = Slot.builder().full(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -28,7 +28,7 @@ public class SlotTest {
     }
 
     @Test
-    public void testSlot_GIVEN_Occupied_THEN_ExpectJsonToBeWithOccupied() throws Exception {
+    public void testSlot_GIVEN_Occupied_THEN_ExpectJsonToBeWithOccupied() {
         underTest = Slot.builder().occupied(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -36,7 +36,7 @@ public class SlotTest {
     }
 
     @Test
-    public void testSlot_GIVEN_Multiple_THEN_ExpectJsonToBeWithMultiple() throws Exception {
+    public void testSlot_GIVEN_Multiple_THEN_ExpectJsonToBeWithMultiple() {
         underTest = Slot.builder().full(Range.builder()).occupied(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());

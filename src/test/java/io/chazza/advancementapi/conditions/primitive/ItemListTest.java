@@ -21,7 +21,7 @@ public class ItemListTest {
     }
 
     @Test
-    public void testItemList_GIVEN_MoreItems_THEN_ExpectJsonToBeWithMoreItems() throws Exception {
+    public void testItemList_GIVEN_MoreItems_THEN_ExpectJsonToBeWithMoreItems() {
         underTest = ItemList.builder().add(Item.builder(Material.SAND)).add(Item.builder(Material.WOOD)).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -29,7 +29,7 @@ public class ItemListTest {
     }
 
     @Test
-    public void testItemList_GIVEN_ItemsClear_THEN_ExpectJsonToBeEmpty() throws Exception {
+    public void testItemList_GIVEN_ItemsClear_THEN_ExpectJsonToBeEmpty() {
         underTest = ItemList.builder().add(Item.builder(Material.SAND)).clear().build();
 
         String json = gson.toJson(underTest.toJson());
