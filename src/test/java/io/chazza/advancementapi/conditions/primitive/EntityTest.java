@@ -24,7 +24,7 @@ public class EntityTest {
     }
 
     @Test
-    public void testEntity_GIVEN_Distance_THEN_ExpectJsonToBeWithDistance() throws Exception {
+    public void testEntity_GIVEN_Distance_THEN_ExpectJsonToBeWithDistance() {
         underTest = Entity.builder().distance(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -32,7 +32,7 @@ public class EntityTest {
     }
 
     @Test
-    public void testEntity_GIVEN_Location_THEN_ExpectJsonToBeWithLocation() throws Exception {
+    public void testEntity_GIVEN_Location_THEN_ExpectJsonToBeWithLocation() {
         underTest = Entity.builder().location(Location.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -40,7 +40,7 @@ public class EntityTest {
     }
 
     @Test
-    public void testEntity_GIVEN_StatusEffect_THEN_ExpectJsonToBeWithEffect() throws Exception {
+    public void testEntity_GIVEN_StatusEffect_THEN_ExpectJsonToBeWithEffect() {
         underTest = Entity.builder().effects(StatusEffect.builder(Effect.SPEED)).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -48,7 +48,7 @@ public class EntityTest {
     }
 
     @Test
-    public void testEntity_GIVEN_RawNBT_THEN_ExpectJsonToBeWithRawNBT() throws Exception {
+    public void testEntity_GIVEN_RawNBT_THEN_ExpectJsonToBeWithRawNBT() {
         underTest = Entity.builder().nbt("{Tags:[\"findme\"]}").build();
 
         String json = gson.toJson(underTest.toJson());

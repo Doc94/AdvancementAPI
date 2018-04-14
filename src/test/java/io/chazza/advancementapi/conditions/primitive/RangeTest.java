@@ -12,7 +12,7 @@ public class RangeTest {
     private Range underTest;
 
     @Test
-    public void testRange_GIVEN_NoArgs_THEN_ExpectJsonToBeRange1() throws Exception {
+    public void testRange_GIVEN_NoArgs_THEN_ExpectJsonToBeRange1() {
         underTest = Range.builder().build();
 
         String json = gson.toJson(underTest.toJson());
@@ -52,7 +52,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testRange_GIVEN_MinMaxSetRange_THEN_ExpectJsonToBeRange() throws Exception {
+    public void testRange_GIVEN_MinMaxSetRange_THEN_ExpectJsonToBeRange() {
         underTest = Range.builder().min(3).max(2).range(6).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -60,7 +60,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testRange_GIVEN_MinRangeMax_THEN_ExpectJsonToBeMinMax() throws Exception {
+    public void testRange_GIVEN_MinRangeMax_THEN_ExpectJsonToBeMinMax() {
         underTest = Range.builder().min(3).range(6).max(2).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -68,7 +68,7 @@ public class RangeTest {
     }
 
     @Test
-    public void testRange_GIVEN_MaxRangeMin_THEN_ExpectJsonToBeMinMax() throws Exception {
+    public void testRange_GIVEN_MaxRangeMin_THEN_ExpectJsonToBeMinMax() {
         underTest = Range.builder().max(3).range(6).min(2).build();
 
         String json = gson.toJson(underTest.toJson());

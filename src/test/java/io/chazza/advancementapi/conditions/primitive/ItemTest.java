@@ -27,7 +27,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testItem_GIVEN_ItemWithTag_THEN_ExpectJsonToBeWithTag() throws Exception {
+    public void testItem_GIVEN_ItemWithTag_THEN_ExpectJsonToBeWithTag() {
         underTest = Item.builder("#minecraft:wool").build();
 
         String json = gson.toJson(underTest.toJson());
@@ -43,7 +43,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testItem_GIVEN_LargeData_THEN_ExpectJsonToBeZero() throws Exception {
+    public void testItem_GIVEN_LargeData_THEN_ExpectJsonToBeZero() {
         underTest = Item.builder("minecraft:stone").data(400_000).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -51,7 +51,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testItem_GIVEN_NoItemWithData_THEN_ExpectJsonWithoutData() throws Exception {
+    public void testItem_GIVEN_NoItemWithData_THEN_ExpectJsonWithoutData() {
         underTest = Item.builder().data(1).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -108,7 +108,7 @@ public class ItemTest {
     }
 
     @Test
-    public void testItem_GIVEN_Enchantments_THEN_ExpectJsonToBeWithEnchantments() throws Exception {
+    public void testItem_GIVEN_Enchantments_THEN_ExpectJsonToBeWithEnchantments() {
         Collection<? extends EnchantmentBuilder> enchantments = Arrays.asList(Enchantment.builder(Range.builder()),
                 Enchantment.builder("minecraft:looting"));
         underTest = Item.builder().enchantments(enchantments).build();

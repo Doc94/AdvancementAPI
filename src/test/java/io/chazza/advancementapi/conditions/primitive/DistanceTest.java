@@ -14,7 +14,7 @@ public class DistanceTest {
     private Distance underTest;
 
     @Test
-    public void testDistance_GIVEN_NoArgs_THEN_ExpectJsonToBeWithAbsolutDefaultRange() throws Exception {
+    public void testDistance_GIVEN_NoArgs_THEN_ExpectJsonToBeWithAbsolutDefaultRange() {
         underTest = Distance.builder().build();
 
         String json = gson.toJson(underTest.toJson());
@@ -30,7 +30,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_AllRanges_THEN_ExpectJsonToBeWithAllRanges() throws Exception {
+    public void testDistance_GIVEN_AllRanges_THEN_ExpectJsonToBeWithAllRanges() {
         underTest = Distance.builder().x(Range.builder().max(4)).y(Range.builder()).z(Range.builder().min(1).max(2))
                 .build();
 
@@ -39,7 +39,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_Absolut_THEN_ExpectJsonToBeWithAbsolut() throws Exception {
+    public void testDistance_GIVEN_Absolut_THEN_ExpectJsonToBeWithAbsolut() {
         underTest = Distance.builder().absolut(Range.builder().max(4)).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -47,7 +47,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_Horizontal_THEN_ExpectJsonToBeWithHorizontal() throws Exception {
+    public void testDistance_GIVEN_Horizontal_THEN_ExpectJsonToBeWithHorizontal() {
         underTest = Distance.builder().horizontal(Range.builder().max(10)).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -55,7 +55,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_RangeXHorizontal_THEN_ExpectJsonToBeWithHorizontal() throws Exception {
+    public void testDistance_GIVEN_RangeXHorizontal_THEN_ExpectJsonToBeWithHorizontal() {
         underTest = Distance.builder().x(Range.builder()).horizontal(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -63,7 +63,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_RangeXAbsolut_THEN_ExpectJsonToBeWithAbsolut() throws Exception {
+    public void testDistance_GIVEN_RangeXAbsolut_THEN_ExpectJsonToBeWithAbsolut() {
         underTest = Distance.builder().x(Range.builder()).absolut(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());
@@ -71,7 +71,7 @@ public class DistanceTest {
     }
 
     @Test
-    public void testDistance_GIVEN_AbsolutRangeY_THEN_ExpectJsonToBeWithRangeY() throws Exception {
+    public void testDistance_GIVEN_AbsolutRangeY_THEN_ExpectJsonToBeWithRangeY() {
         underTest = Distance.builder().absolut(Range.builder()).y(Range.builder()).build();
 
         String json = gson.toJson(underTest.toJson());

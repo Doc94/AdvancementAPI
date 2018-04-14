@@ -18,7 +18,7 @@ public class LocationTest {
     private Location underTest;
 
     @Test
-    public void testLocation_GIVEN_NoArgs_THEN_ExpectJsonToBeLocationWithDimensionOverworld() throws Exception {
+    public void testLocation_GIVEN_NoArgs_THEN_ExpectJsonToBeLocationWithDimensionOverworld() {
         underTest = Location.builder().build();
 
         JsonObject testHolder = new JsonObject();
@@ -118,7 +118,7 @@ public class LocationTest {
     }
 
     @Test
-    public void testLocation_GIVEN_RangeXDimension_THEN_ExpectJsonToBeLocationWithDimension() throws Exception {
+    public void testLocation_GIVEN_RangeXDimension_THEN_ExpectJsonToBeLocationWithDimension() {
         underTest = Location.builder().x(Range.builder()).dimension(Dimension.THE_END).build();
 
         JsonObject testHolder = new JsonObject();
@@ -129,7 +129,7 @@ public class LocationTest {
     }
 
     @Test
-    public void testLocation_GIVEN_BiomeRangeX_THEN_ExpectJsonToBeLocationWithRangeX() throws Exception {
+    public void testLocation_GIVEN_BiomeRangeX_THEN_ExpectJsonToBeLocationWithRangeX() {
         underTest = Location.builder().biome(Biome.BEACHES).x(Range.builder()).build();
 
         JsonObject testHolder = new JsonObject();
