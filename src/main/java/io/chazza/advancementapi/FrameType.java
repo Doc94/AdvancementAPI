@@ -1,41 +1,43 @@
 package io.chazza.advancementapi;
 
-import org.bukkit.Bukkit;
-
 /**
- * Created by ysl3000
+ * The possible frame types.
+ * 
+ * @author ysl3000
+ * @author Kaonashi97
  */
 public enum FrameType {
-    TASK("task"),
-    GOAL("goal"),
-    CHALLENGE("challenge");
+    TASK, GOAL, CHALLENGE;
 
-    private String name;
-
-    FrameType(String name) {
-        this.name = name;
-    }
-
-    public static FrameType getFromString(String frameType) {
-        if (frameType.equalsIgnoreCase("random")) {
-            return FrameType.RANDOM();
-        } else {
-            try {
-                return FrameType.valueOf(frameType);
-            } catch (EnumConstantNotPresentException e) {
-                Bukkit.getLogger().info("[AdvancementAPI] Unknown FrameType given. Using default (TASK)");
-                return FrameType.TASK;
-            }
-        }
-    }
-
+    /**
+     * Returns a random frame type.
+     * 
+     * @return
+     */
     public static FrameType RANDOM() {
         FrameType[] frameTypes = FrameType.values();
         return frameTypes[(int) (Math.random() * (frameTypes.length - 1))];
     }
 
+    /**
+     * Returns the {@link FrameType} parsing from a string.
+     * 
+     * @param s a string
+     * @return the type if found or {@link FrameType#TASK TASK} on default
+     */
+    public static FrameType getFromString(String s) {
+        if (s.equalsIgnoreCase("random")) {
+            return FrameType.RANDOM();
+        }
+        try {
+            return FrameType.valueOf(s.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return FrameType.TASK;
+        }
+    }
+
     @Override
     public String toString() {
-        return name;
+        return super.toString().toLowerCase();
     }
 }
