@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import io.chazza.advancementapi.conditions.primitive.Range;
-
 public class DistanceTest {
     private static final Gson gson = new Gson();
     private Distance underTest;
