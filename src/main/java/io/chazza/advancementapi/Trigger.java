@@ -1,131 +1,138 @@
 package io.chazza.advancementapi;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-/**
- * Created by ysl3000
- */
-public class Trigger {
-    protected TriggerType type;
-    protected String name;
-    protected Set<Condition.ConditionBuilder> conditions;
+import io.chazza.advancementapi.Condition.ConditionBuilder;
+import io.chazza.advancementapi.common.Builder;
+import io.chazza.advancementapi.common.KeyedJsonable;
 
-    private Trigger(TriggerType type, String name, Set<Condition.ConditionBuilder> conditions) {
+/**
+ * This is the base class for a representing a trigger. A trigger must have a
+ * {@link TriggerType} and can have zero to more {@link Condition}s.
+ * 
+ * @author ysl3000
+ * @author Kaonashi97
+ */
+public class Trigger implements KeyedJsonable {
+    private TriggerType type;
+    private String name;
+    private List<ConditionBuilder> conditions = new LinkedList<>();
+
+    private Trigger(TriggerType type, String name, List<ConditionBuilder> conditions) {
         this.type = type;
         this.name = name;
         this.conditions = conditions;
     }
 
+    /**
+     * Returns a {@link TriggerBuilder} for building {@link Trigger}s.
+     * 
+     * @param type the {@link TriggerType}
+     * @param name the unique name
+     * @return
+     */
     public static TriggerBuilder builder(TriggerType type, String name) {
         return new TriggerBuilder().type(type).name(name);
     }
 
-    public JsonObject toJsonObject() {
+    @Override
+    public String getJsonKey() {
+        return name;
+    }
+
+    @Override
+    public JsonElement toJson() {
         JsonObject triggerObj = new JsonObject();
-
-        final JsonObject advConditions = new JsonObject();
-        triggerObj.addProperty("trigger", "minecraft:" + this.type.toString().toLowerCase());
-        this.conditions.forEach(conditionBuilder -> {
-            Condition condition = conditionBuilder.build();
-            advConditions.add(condition.name, condition.set);
-        });
-        if (!this.conditions.isEmpty())
-            triggerObj.add("conditions", advConditions);
-
+        triggerObj.addProperty("trigger", type.toString());
+        if (!conditions.isEmpty()) {
+            JsonObject conditionsObj = new JsonObject();
+            conditions.forEach(conditionBuilder -> {
+                Condition condition = conditionBuilder.build();
+                conditionsObj.add(condition.getJsonKey(), condition.toJson());
+            });
+            triggerObj.add("conditions", conditionsObj);
+        }
         return triggerObj;
     }
 
-    public static enum TriggerType {
-        ARBITRARY_PLAYER_TICK,
-        BRED_ANIMALS,
-        BREWED_POTION,
-        CHANGED_DIMENSION,
-        CONSTRUCT_BEACON,
-        CONSUME_ITEM,
-        CURED_ZOMBIE_VILLAGER,
-        ENCHANTED_ITEM,
-        ENTER_BLOCK,
-        ENTITY_HURT_PLAYER,
-        ENTITY_KILLED_PLAYER,
-        IMPOSSIBLE,
-        INVENTORY_CHANGED,
-        ITEM_DURABILITY_CHANGED,
-        LEVITATION,
-        LOCATION,
-        PLACED_BLOCK,
-        PLAYER_HURT_ENTITY,
-        PLAYER_KILLED_ENTITY,
-        RECIPE_UNLOCKED,
-        SLEPT_IN_BED,
-        SUMMONED_ENTITY,
-        TAME_ANIMAL,
-        TICK,
-        USED_ENDER_EYE,
-        VILLAGER_TRADE
-    }
-
-    public static class TriggerBuilder {
+    /**
+     * Builder for {@link Trigger}s. See {@link Trigger} for more information.
+     * 
+     * @author ysl3000
+     * @author Kaonashi97
+     */
+    public static class TriggerBuilder implements Builder<Trigger> {
         private TriggerType type;
         private String name;
-        private ArrayList<Condition.ConditionBuilder> conditions;
+        private List<ConditionBuilder> conditions = new LinkedList<>();
 
-        TriggerBuilder() {
+        private TriggerBuilder() {
+            // builder pattern
         }
 
-        public Trigger.TriggerBuilder type(TriggerType type) {
+        /**
+         * Sets the {@link TriggerType}.
+         * 
+         * @param type the type
+         * @return this builder
+         */
+        public TriggerBuilder type(TriggerType type) {
             this.type = type;
             return this;
         }
 
-        public Trigger.TriggerBuilder name(String name) {
+        /**
+         * Sets the trigger name. Each trigger name must be unique.
+         * 
+         * @param name the unique name
+         * @return this builder
+         */
+        public TriggerBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Trigger.TriggerBuilder condition(Condition.ConditionBuilder condition) {
-            if (this.conditions == null)
-                this.conditions = new ArrayList<Condition.ConditionBuilder>();
+        /**
+         * Adds a {@link Condition} to this trigger.
+         * 
+         * @param condition a {@link ConditionBuilder}
+         * @return this builder
+         */
+        public TriggerBuilder condition(ConditionBuilder condition) {
             this.conditions.add(condition);
             return this;
         }
 
-        public Trigger.TriggerBuilder conditions(Collection<? extends Condition.ConditionBuilder> conditions) {
-            if (this.conditions == null)
-                this.conditions = new ArrayList<Condition.ConditionBuilder>();
+        /**
+         * Adds a {@link Collection} of {@link Condition}s to this trigger.
+         * 
+         * @param conditions a {@link Collection}
+         * @return this builder
+         */
+        public TriggerBuilder conditions(Collection<? extends ConditionBuilder> conditions) {
             this.conditions.addAll(conditions);
             return this;
         }
 
-        public Trigger.TriggerBuilder clearConditions() {
-            if (this.conditions != null)
-                this.conditions.clear();
+        /**
+         * Clears the saved {@link Condition}s.
+         * 
+         * @return this builder
+         */
+        public TriggerBuilder clearConditions() {
+            this.conditions.clear();
             return this;
         }
 
-        public Trigger build() {
-            Set<Condition.ConditionBuilder> conditions;
-            switch (this.conditions == null ? 0 : this.conditions.size()) {
-                case 0:
-                    conditions = java.util.Collections.emptySet();
-                    break;
-                case 1:
-                    conditions = java.util.Collections.singleton(this.conditions.get(0));
-                    break;
-                default:
-                    conditions = new java.util.LinkedHashSet<Condition.ConditionBuilder>(this.conditions.size() < 1073741824 ? 1 + this.conditions.size() + (this.conditions.size() - 3) / 3 : Integer.MAX_VALUE);
-                    conditions.addAll(this.conditions);
-                    conditions = java.util.Collections.unmodifiableSet(conditions);
-            }
-            return new Trigger(type, name, conditions);
-        }
-
         @Override
-        public String toString() {
-            return "io.chazza.advancementapi.Trigger.TriggerBuilder(type=" + this.type + ", name=" + this.name + ", conditions=" + this.conditions + ")";
+        public Trigger build() {
+            return new Trigger(type, name, Collections.unmodifiableList(this.conditions));
         }
     }
 }
