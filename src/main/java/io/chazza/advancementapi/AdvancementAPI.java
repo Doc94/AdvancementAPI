@@ -168,16 +168,23 @@ public class AdvancementAPI implements Jsonable {
      * 
      * @return this advancement
      */
-    @SuppressWarnings("deprecation")
     public AdvancementAPI add() {
-        try {
-            Bukkit.getUnsafe().loadAdvancement(id, getJson());
+        if (add0()) {
             Bukkit.getLogger().info(() -> LOG_PREFIX + "Successfully registered advancement \"" + id + "\".");
+            return this;
+        }
+        Bukkit.getLogger().severe(() -> LOG_PREFIX + "Error registering advancement \"" + id + "\".");
+        return this;
+    }
+
+    @SuppressWarnings("deprecation")
+    boolean add0() {
+        try {
+            return Bukkit.getUnsafe().loadAdvancement(id, getJson()) != null;
         } catch (Exception ex) {
-            Bukkit.getLogger().severe(() -> LOG_PREFIX + "Error registering advancement \"" + id + "\".");
             ex.printStackTrace();
         }
-        return this;
+        return false;
     }
 
     /**
@@ -185,10 +192,18 @@ public class AdvancementAPI implements Jsonable {
      * 
      * @return this advancement
      */
-    @SuppressWarnings("deprecation")
     public AdvancementAPI remove() {
-        Bukkit.getUnsafe().removeAdvancement(id);
+        if (remove0()) {
+            Bukkit.getLogger().info(() -> LOG_PREFIX + "Successfully removed advancement \"" + id + "\".");
+            return this;
+        }
+        Bukkit.getLogger().severe(() -> LOG_PREFIX + "Error removing advancement \"" + id + "\".");
         return this;
+    }
+
+    @SuppressWarnings("deprecation")
+    boolean remove0() {
+        return Bukkit.getUnsafe().removeAdvancement(id);
     }
 
     /**
@@ -271,14 +286,14 @@ public class AdvancementAPI implements Jsonable {
      * @param world the worldname
      */
     public void save(String world) {
-        if (save(Bukkit.getWorld(world).getWorldFolder())) {
+        if (save0(Bukkit.getWorld(world).getWorldFolder())) {
             Bukkit.getLogger().info(() -> LOG_PREFIX + "Created " + id);
             return;
         }
         Bukkit.getLogger().severe(() -> LOG_PREFIX + "Error on saving advancement " + id);
     }
 
-    protected boolean save(File worldFolder) {
+    boolean save0(File worldFolder) {
         File file = new File(worldFolder, getAdvancementFile());
         File dir = file.getParentFile();
         if (dir.mkdirs() || dir.exists()) {
@@ -302,14 +317,14 @@ public class AdvancementAPI implements Jsonable {
      * @param world the worldname
      */
     public void delete(String world) {
-        if (delete(Bukkit.getWorld(world).getWorldFolder())) {
+        if (delete0(Bukkit.getWorld(world).getWorldFolder())) {
             Bukkit.getLogger().info(() -> LOG_PREFIX + "Deleted " + id);
             return;
         }
         Bukkit.getLogger().severe(() -> LOG_PREFIX + "Error on deleting advancement " + id);
     }
 
-    protected boolean delete(File worldFolder) {
+    boolean delete0(File worldFolder) {
         File file = new File(worldFolder, getAdvancementFile());
         if (file.exists()) {
             return file.delete();

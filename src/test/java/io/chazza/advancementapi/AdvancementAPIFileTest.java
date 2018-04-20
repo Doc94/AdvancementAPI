@@ -45,7 +45,7 @@ public class AdvancementAPIFileTest {
     public void testAdvancement_Save_THEN_SaveAdvancementToLocalFileDir() throws Exception {
         underTest = AdvancementAPI.builder(nsk).build();
 
-        assertThat(underTest.save(worldFile), is(true));
+        assertThat(underTest.save0(worldFile), is(true));
 
         File advancement = new File(worldFile, "data/advancements/tests/id.json");
         assertThat(advancement.exists(), is(true));
@@ -65,7 +65,7 @@ public class AdvancementAPIFileTest {
         advancement.getParentFile().mkdirs();
         new FileWriter(advancement).close();
 
-        assertThat(underTest.save(worldFile), is(true));
+        assertThat(underTest.save0(worldFile), is(true));
 
         BufferedReader br = new BufferedReader(new FileReader(advancement));
         String line;
@@ -78,9 +78,9 @@ public class AdvancementAPIFileTest {
     @Test
     public void testAdvancement_Delete_THEN_DeleteAdvancementFromLoveFileDir() {
         underTest = AdvancementAPI.builder(nsk).build();
-        underTest.save(worldFile);
+        underTest.save0(worldFile);
 
-        assertThat(underTest.delete(worldFile), is(true));
+        assertThat(underTest.delete0(worldFile), is(true));
         File advancement = new File(worldFile, "data/advancements/tests/id.json");
         assertThat(advancement.exists(), is(false));
     }
@@ -88,11 +88,11 @@ public class AdvancementAPIFileTest {
     @Test
     public void testAdvancement_ExternalDeletedFile_THEN_HandleNotExistingFileProperly() {
         underTest = AdvancementAPI.builder(nsk).build();
-        underTest.save(worldFile);
+        underTest.save0(worldFile);
 
         File advancement = new File(worldFile, "data/advancements/tests/id.json");
         advancement.delete();
 
-        assertThat(underTest.delete(worldFile), is(false));
+        assertThat(underTest.delete0(worldFile), is(false));
     }
 }
