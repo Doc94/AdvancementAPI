@@ -57,7 +57,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-distance-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-distance-object"
  */
 public class Distance implements Jsonable {
     private RangeBuilder x;

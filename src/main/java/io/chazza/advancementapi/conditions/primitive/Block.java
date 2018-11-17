@@ -21,7 +21,7 @@ import io.chazza.advancementapi.common.Jsonable;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-block-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-block-object"
  */
 public class Block implements Jsonable {
     private String block;

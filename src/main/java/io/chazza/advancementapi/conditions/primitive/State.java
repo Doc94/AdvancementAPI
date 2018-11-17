@@ -30,7 +30,7 @@ import io.chazza.advancementapi.common.Jsonable;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-block-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-block-object"
  */
 public class State implements Jsonable {
     private Map<String, String> states = new LinkedHashMap<>();
@@ -74,7 +74,7 @@ public class State implements Jsonable {
          * you want to detect, and the value corresponds to possible values for
          * that blockstate.
          * 
-         * @param key the key
+         * @param state the key
          * @param value the value
          * @return this builder
          */

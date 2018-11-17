@@ -68,7 +68,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-location-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-location-object"
  */
 public class Location implements KeyedJsonable {
     private RangeBuilder x;

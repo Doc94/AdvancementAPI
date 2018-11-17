@@ -25,7 +25,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/triggers.md#1-slots
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/triggers.md#1-slots"
  */
 public class Slot implements Jsonable {
     private RangeBuilder occupied;

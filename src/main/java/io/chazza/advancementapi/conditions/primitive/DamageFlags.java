@@ -119,7 +119,7 @@ import io.chazza.advancementapi.conditions.primitive.Entity.EntityBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-damage-flags-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-damage-flags-object"
  */
 public class DamageFlags implements Jsonable {
     private Boolean bypasses_armor;
@@ -293,7 +293,7 @@ public class DamageFlags implements Jsonable {
          * only use a damage flags object rather than a damage object.
          * 
          * @param sourceEntity the {@link EntityBuilder}
-         * @return
+         * @return the builder
          */
         public DamageFlagsBuilder sourceEntity(EntityBuilder sourceEntity) {
             this.source_entity = sourceEntity;
@@ -306,7 +306,7 @@ public class DamageFlags implements Jsonable {
          * arrow would be the "direct entity".
          * 
          * @param directEntity the {@link EntityBuilder}
-         * @return
+         * @return the builder
          */
         public DamageFlagsBuilder directEntity(EntityBuilder directEntity) {
             this.direct_entity = directEntity;

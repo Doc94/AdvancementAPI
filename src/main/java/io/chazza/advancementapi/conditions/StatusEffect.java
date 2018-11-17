@@ -51,7 +51,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-status-effects-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-status-effects-object"
  */
 public class StatusEffect implements KeyedJsonable {
     private Effect effectType;

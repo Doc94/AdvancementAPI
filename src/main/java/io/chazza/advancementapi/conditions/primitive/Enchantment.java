@@ -30,7 +30,7 @@ import io.chazza.advancementapi.conditions.primitive.Range.RangeBuilder;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-item-object
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-item-object"
  */
 public class Enchantment implements Jsonable {
     private String enchantment;

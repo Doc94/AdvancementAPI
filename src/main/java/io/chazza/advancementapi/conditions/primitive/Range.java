@@ -53,7 +53,7 @@ import io.chazza.advancementapi.common.Jsonable;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-range
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements/data_structures.md#-shared-range"
  */
 public class Range implements Jsonable {
     private Integer min;
