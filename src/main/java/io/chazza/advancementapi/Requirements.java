@@ -144,7 +144,7 @@ import io.chazza.advancementapi.common.Jsonable;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements.md#-requirements
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements.md#-requirements"
  */
 public class Requirements implements Jsonable {
     private List<List<String>> requirements = new LinkedList<>();

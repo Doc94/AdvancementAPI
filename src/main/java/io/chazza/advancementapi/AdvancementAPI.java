@@ -77,8 +77,8 @@ import io.chazza.advancementapi.common.Jsonable;
  * full Builder-Pattern support, Lombok
  * @author Kaonashi97 - Conditions
  * 
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements.md
- * @see https://github.com/kaonashi97/AdvancementAPI
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements.md"
+ * @see "https://github.com/kaonashi97/AdvancementAPI"
  */
 public class AdvancementAPI implements Jsonable {
     private static final String LOG_PREFIX = "[AdvancementAPI] ";

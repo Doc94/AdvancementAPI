@@ -155,7 +155,7 @@ import net.md_5.bungee.chat.ComponentSerializer;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements.md#-display
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements.md#-display"
  */
 public class Display implements Jsonable {
     private static final Gson gson = new Gson();

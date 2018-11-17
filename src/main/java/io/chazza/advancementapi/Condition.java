@@ -90,7 +90,7 @@ public class Condition implements KeyedJsonable {
      * 
      * @param name the condition name (e.g. <code>from</code>)
      * @param string the condition value
-     * @return
+     * @return the builder
      */
     public static ConditionBuilder builder(String name, String string) {
         return new ConditionBuilder().name(name).set(string);

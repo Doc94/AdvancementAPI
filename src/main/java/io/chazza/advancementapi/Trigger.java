@@ -35,7 +35,7 @@ public class Trigger implements KeyedJsonable {
      * 
      * @param type the {@link TriggerType}
      * @param name the unique name
-     * @return
+     * @return the builder
      */
     public static TriggerBuilder builder(TriggerType type, String name) {
         return new TriggerBuilder().type(type).name(name);

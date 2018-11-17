@@ -99,7 +99,7 @@ import io.chazza.advancementapi.common.Jsonable;
  * </pre>
  * 
  * @author Kaonashi97
- * @see https://github.com/skylinerw/guides/blob/master/java/advancements.md#-rewards
+ * @see "https://github.com/skylinerw/guides/blob/master/java/advancements.md#-rewards"
  */
 public class Rewards implements Jsonable {
     private List<String> recipes = new LinkedList<>();

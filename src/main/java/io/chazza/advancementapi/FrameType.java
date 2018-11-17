@@ -12,7 +12,7 @@ public enum FrameType {
     /**
      * Returns a random frame type.
      * 
-     * @return
+     * @return a random frame type
      */
     public static FrameType RANDOM() {
         FrameType[] frameTypes = FrameType.values();
